@@ -7,7 +7,7 @@ const Root = () => {
     return (
         <div>
             <Header/>
-            <Outlet />
+            <Outlet className="min-h-screen"/>
             <Footer/>
         </div>
     );
