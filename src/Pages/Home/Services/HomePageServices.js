@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import ServiceCard from "./ServiceCard";
 
 const HomePageServices = () => {
@@ -18,6 +19,13 @@ const HomePageServices = () => {
           <ServiceCard key={service._id} service={service}></ServiceCard>
         ))}
       </div>
+      <Link to='/services'> <button
+        type="button"
+        className="px-14 block  mt-10 py-3 font-semibold rounded-full bg-green-200 text-gray-800 hover:bg-green-400 mx-auto "
+      >
+        See All
+      </button></Link>
+     
     </div>
   );
 };
