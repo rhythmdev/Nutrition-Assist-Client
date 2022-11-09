@@ -3,6 +3,7 @@ import Root from "../../Layout/Root";
 import Blog from "../../Pages/Blog/Blog";
 import ErrorPage from "../../Pages/ErrorPage/ErrorPage";
 import Home from '../../Pages/Home/Home/Home'
+import Services from "../../Pages/Home/Services/Services";
 
 const router = createBrowserRouter([
  {
@@ -18,6 +19,11 @@ const router = createBrowserRouter([
          path: '/home',
          element: <Home/>
       },
+      {
+         path: '/services',
+         element: <Services/>
+      }
+      ,
       {
          path: '/blog',
          element: <Blog/>

@@ -7,7 +7,7 @@ const Banner = () => {
     <div className="my-10 mx-auto">
       <section className="bg-gray-100 text-gray-800 rounded-md">
         <div className="container flex flex-col justify-center p-6 mx-auto sm:py-12 lg:py-24 lg:flex-row lg:justify-between">
-          <div className="flex flex-col justify-center p-6 text-center rounded-sm lg:max-w-md xl:max-w-lg lg:text-left  text-6xl font-bold ">
+          <div className="flex flex-col justify-center p-6 text-center rounded-sm lg:max-w-md xl:max-w-lg lg:text-left  text-6xl font-bold font-mono">
             <Typewriter
               options={{
                 autoStart: true,
