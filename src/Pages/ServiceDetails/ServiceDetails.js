@@ -2,7 +2,7 @@ import React from "react";
 import { useLoaderData } from "react-router-dom";
 
 const ServiceDetails = () => {
-  const { __id, title, image, price, description } = useLoaderData();
+  const {  title, image, price, description } = useLoaderData();
 
   return (
     <div className="my-16">
