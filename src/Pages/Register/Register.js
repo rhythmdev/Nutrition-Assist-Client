@@ -1,3 +1,4 @@
+import { updateProfile } from "firebase/auth";
 import React, { useContext, useState } from "react";
 import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
@@ -5,7 +6,7 @@ import auth from "../../assets/auth.svg";
 import { AuthContext } from "../../contexts/AuthProvider/AuthProvide";
 
 const Register = () => {
-  const { createUser, setUser } = useContext(AuthContext);
+  const { createUser, setUser, updateData } = useContext(AuthContext);
   const [error, setError] = useState("");
 
   const handelSignUp = (event) => {
@@ -15,21 +16,15 @@ const Register = () => {
     const photoURL = form.photoURL.value;
     const email = form.email.value;
     const password = form.password.value;
-    console.log(name, photoURL, email, password);
 
     createUser(email, password)
       .then((result) => {
         const user = result.user;
-
-        setUser({
-          name: name,
-          email: email,
-          photoURL: photoURL,
-          uid: user.uid,
-        });
-
+        setUser(user);
+        updateData(name, photoURL);
         setError("");
-        toast.success("Registration Successful");
+        toast.success("Registration Successfully");
+
         form.reset();
       })
       .catch((error) => {

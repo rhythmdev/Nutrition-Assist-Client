@@ -1,29 +1,48 @@
-import React from "react";
+import React, { useContext } from "react";
+
 import { Link } from "react-router-dom";
 import logo from "../../../assets/logo.svg";
+import { AuthContext } from "../../../contexts/AuthProvider/AuthProvide";
 
 const Header = () => {
+  const { user, logOut } = useContext(AuthContext);
+
+  const handleLogOut = () => {
+    logOut()
+      .then()
+      .catch((err) => console.error(err));
+  };
+
   const menuItems = (
     <>
       <li className="font-semibold">
         <Link to="/">Home</Link>
       </li>
+      {user?.email ? (
+        <>
+          <li className="font-semibold">
+            <Link to="/blog">My Reviews</Link>
+          </li>
+          <li className="font-semibold">
+            <Link to="/blog">Add Service</Link>
+          </li>
+          <li className="font-semibold">
+            <button onClick={handleLogOut} className="btn-ghost">
+              Sign Out
+            </button>
+          </li>
+        </>
+      ) : (
+        <li className="font-semibold">
+          <Link to="/login">Login</Link>
+        </li>
+      )}
 
       <li className="font-semibold">
         <Link to="/services">Services</Link>
       </li>
       <li className="font-semibold">
         <Link to="/blog">Blog</Link>
-      </li>
-      <li className="font-semibold">
-        <Link to="/blog">My Services</Link>
-      </li>
-      <li className="font-semibold">
-        <Link to="/blog">Add Services</Link>
-      </li>
-
-      <li className="font-semibold">
-        <Link to="/login">Login</Link>
       </li>
     </>
   );
@@ -64,7 +83,27 @@ const Header = () => {
           <ul className="menu menu-horizontal p-0">{menuItems}</ul>
         </div>
         <div className="navbar-end">
-          <button className="btn btn-outline btn-warning">Appointment</button>
+          {user?.email ? (
+            <>
+              <p className="font-semibold mr-3">{user?.displayName}</p>
+            </>
+          ) : (
+            <p className="font-semibold mr-3">Barry Allen</p>
+          )}
+
+          {user?.email ? (
+            <div className="avatar online">
+              <div className="w-10 rounded-full">
+                <img src={user?.photoURL} alt="" />
+              </div>
+            </div>
+          ) : (
+            <div className="avatar online">
+              <div className="w-10 rounded-full">
+                <img src="https://placeimg.com/192/192/people" alt="" />
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </div>

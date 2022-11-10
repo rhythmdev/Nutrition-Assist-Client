@@ -22,7 +22,9 @@ const Login = () => {
           uid: user.uid,
         });
         setError("");
-        toast.success("Login Successful");
+        toast.success(
+          `Welcome ${user?.displayName ? user?.displayName : "No Name Found"}`
+        );
         form.reset();
         console.log(user);
       })
@@ -30,19 +32,19 @@ const Login = () => {
   };
 
   //** google sign in */
+  // google sign in
   const handelGoogleSignIn = () => {
     signInWithGoogle()
       .then((result) => {
         const user = result.user;
-        setUser({
-          email: user.email,
-          uid: user.uid,
-        });
-        setError("");
-        toast.success("Login Successful");
+        setUser(user);
         console.log(user);
+        setError("");
+        toast.success(
+          `Welcome ${user?.displayName ? user?.displayName : "No Name Found"}`
+        );
       })
-      .catch((error) => setError(toast.error(error.message)));
+      .catch((error) => toast.error(error.message));
   };
 
   return (
