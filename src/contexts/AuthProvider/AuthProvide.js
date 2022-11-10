@@ -1,4 +1,4 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useEffect, useState } from "react";
 import {
   createUserWithEmailAndPassword,
   getAuth,
@@ -32,16 +32,28 @@ const AuthProvide = ({ children }) => {
     return signInWithEmailAndPassword(auth, email, password);
   };
 
-  //** sign out */
-  const logOut = () => {
-    setLoading(true);
-    return signOut(auth);
-  };
   //** google sign in */
   const signInWithGoogle = () => {
     setLoading(true);
     return signInWithPopup(auth, googleProvider);
   };
+
+  //** sign out */
+  const logOut = () => {
+    setLoading(true);
+    return signOut(auth);
+  };
+
+  //** observe user state change */
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
+      setLoading(false);
+    });
+    return () => {
+      return unsubscribe();
+    };
+  }, []);
 
   const authInfo = {
     createUser,
