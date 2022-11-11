@@ -9,6 +9,7 @@ import Register from "../../Pages/Register/Register";
 import MyReviews from "../../Pages/Reviews/MyReviews";
 import ServiceDetails from "../../Pages/ServiceDetails/ServiceDetails";
 import AddServices from '../../Pages/Home/Services/AddServices'
+import ReviewCard from "../../Pages/Reviews/ReviewCard";
 
 const router = createBrowserRouter([
  {
@@ -55,6 +56,10 @@ const router = createBrowserRouter([
       {
          path: '/addservice',
          element: <AddServices/>
+      },
+      {
+         path: '/reviewcard',
+         element: <ReviewCard/>
       }
 
     ]
