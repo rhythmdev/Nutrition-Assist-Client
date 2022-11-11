@@ -1,41 +1,59 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { AuthContext } from '../../contexts/AuthProvider/AuthProvide';
+import React, { useContext, useEffect, useState } from "react";
+import { AuthContext } from "../../contexts/AuthProvider/AuthProvide";
+import MyReviewCard from "../Reviews/MyReviewCard"
 
 const MyReviews = () => {
-    const {user} = useContext(AuthContext);
-    const [reviews, setReviews] = useState([]);
+  const { user } = useContext(AuthContext);
 
-    //** Get all reviews from mongodb */
-    useEffect(() => {
-        fetch(`http://localhost:5000/reviews?email=${user?.email}`)
-            .then(res => res.json())
-            .then(data => setReviews(data))
-    }, [user?.email])
+  const [reviews, setReviews] = useState([]);
 
-    return (
-        <div>
-            <h1 className="text-3xl font-bold text-center my-8">My Reviews</h1>
-            <div className="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-12">
-                {
-                    reviews?.map(review => <div className="card lg:card-side bg-base-100 shadow-xl">
-                        <figure>
-                            <img src={review.photoURL} alt="" />
-                        </figure>
-                        <div className="card-body">
-                            <h2 className="card-title">{review.userName}</h2>
-                            <p>{review.review}</p>
-                            <p>{review.date}</p>
-                        </div>
-                    </div>)
-                }
+  //** Get all reviews from mongodb */
+  useEffect(
+    () => {
+      fetch(`http://localhost:5000/myreviews?email=${user?.email}`)
+        .then((res) => res.json())
+        .then((data) => setReviews(data));
+    },
+    [user?.email],
+    reviews
+  );
 
-                </div>
-                            
-                                                    
-                            
+  return (
+    <div>
+      <h1 className="text-3xl font-bold text-center my-8">My Reviews</h1>
+      <div className=" mt-12">
+        <div className="overflow-x-auto w-full">
+          <table className="table w-full">
+            <thead>
+              <tr>
+                <th>Delete</th>
+                <th>User</th>
+                <th>Reviews</th>
+                <th>Date</th>
+                <th>Edit</th>
+              </tr>
+            </thead>
+            <tbody>
+                
+            {
+              reviews === 0 &&
+               <div className='w-full h-20 bg-slate-100'>
 
+
+                <h1 className='text-lg text-center text-semibold'>No reviews were Added</h1>
+
+
+              </div>
+            }
+              {reviews.map((review) => (
+                <MyReviewCard key={review._id} usrReview={review}></MyReviewCard>
+              ))}
+            </tbody>
+          </table>
         </div>
-    );
+      </div>
+    </div>
+  );
 };
 
 export default MyReviews;

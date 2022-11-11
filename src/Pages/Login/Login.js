@@ -1,12 +1,16 @@
 import React, { useContext, useState } from "react";
 import toast from "react-hot-toast";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import auth from "../../assets/auth.svg";
 import { AuthContext } from "../../contexts/AuthProvider/AuthProvide";
 
 const Login = () => {
   const { signIn, setUser, signInWithGoogle } = useContext(AuthContext);
   const [error, setError] = useState("");
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const from = location.state?.from?.pathname || '/';
   //** sign in with email and password */
   const handleLogin = (event) => {
     event.preventDefault();
@@ -24,7 +28,9 @@ const Login = () => {
         setError("");
         toast.success(
           `Welcome ${user?.displayName ? user?.displayName : "No Name Found"}`
+         
         );
+        navigate(from, { replace: true });
         form.reset();
         console.log(user);
       })
@@ -43,6 +49,7 @@ const Login = () => {
         toast.success(
           `Welcome ${user?.displayName ? user?.displayName : "No Name Found"}`
         );
+        navigate(from, { replace: true });
       })
       .catch((error) => toast.error(error.message));
   };

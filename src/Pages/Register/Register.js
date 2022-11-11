@@ -1,13 +1,17 @@
 import { updateProfile } from "firebase/auth";
 import React, { useContext, useState } from "react";
 import toast from "react-hot-toast";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import auth from "../../assets/auth.svg";
 import { AuthContext } from "../../contexts/AuthProvider/AuthProvide";
 
 const Register = () => {
   const { createUser, setUser, updateData } = useContext(AuthContext);
   const [error, setError] = useState("");
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const from = location.state?.from?.pathname || '/';
 
   const handelSignUp = (event) => {
     event.preventDefault();
@@ -24,7 +28,7 @@ const Register = () => {
         updateData(name, photoURL);
         setError("");
         toast.success("Registration Successfully");
-
+        navigate(from, { replace: true });
         form.reset();
       })
       .catch((error) => {

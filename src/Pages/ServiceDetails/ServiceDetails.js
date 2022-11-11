@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { Link, useLoaderData } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthProvider/AuthProvide";
+import ServiceReviewCard from "../Home/Services/ServiceReviewCard"
 
 const ServiceDetails = () => {
   const { user } = useContext(AuthContext);
@@ -118,38 +119,21 @@ const ServiceDetails = () => {
           style={{ borderTopWidth: "4px" }}
         />
         {reviews.length > 0 ? (
-          <div className="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-12">
-            <div className="flex flex-col max-w-xl p-4 shadow-md rounded-xl lg:p-12 bg-gray-50 text-gray-800 mx-auto">
-              {reviews.map((review) => (
-                <div
-                  key={review._id}
-                  review={review}
-                  className="container flex flex-col w-full max-w-lg p-6   mx-auto divide-y rounded-md divide-gray-300 bg-gray-50 text-gray-800"
-                >
-                  <div className="flex justify-between p-4 mx-auto">
-                    <div className="flex space-x-4">
-                      <div>
-                        <img
-                          src={review?.photoURL}
-                          alt=""
-                          className="object-cover w-12 h-12 rounded-full bg-gray-500"
-                        />
-                      </div>
-                      <div>
-                        <h4 className="font-bold">{review?.userName}</h4>
-                        <span className="text-xs text-gray-600">
-                          {review?.date}
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="p-4 space-y-2 text-sm text-gray-600 text-center font-semibold">
-                    <p>{review?.review}</p>
-                  </div>
-                </div>
-              ))}
+         
+          <>
+          <section className="my-8 bg-gray-100 text-gray-800">
+            <div className="container flex flex-col items-center justify-center mx-auto lg:flex-row lg:flex-wrap lg:justify-evenly lg:px-10">
+            {
+            reviews.map(review => <ServiceReviewCard key={review._id} newReview={review}></ServiceReviewCard>)
+          }
             </div>
-          </div>
+          </section>
+         
+          </>
+          
+         
+          
+         
         ) : (
           <p className="text-center text-2xl font-semibold mt-5">
             No Reviews Found
