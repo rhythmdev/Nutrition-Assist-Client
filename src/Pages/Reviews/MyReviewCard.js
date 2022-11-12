@@ -1,16 +1,20 @@
 import React from "react";
 
 import { MdDelete, MdEditNote } from "react-icons/md";
+import { Link } from "react-router-dom";
 
-const ReviewCard = ({usrReview}) => {
+const ReviewCard = ({usrReview, handelDeleteReview}) => {
 
-    const {email, userName, photoURL, review, date} = usrReview;
+    const {_id, email, userName, photoURL, review, date} = usrReview;
   
   return (
     <tr>
     <th>
       <label>
-     <MdDelete/>
+        <button onClick={ () => handelDeleteReview(_id)}  className="btn btn-ghost btn-xs hover:bg-red-500">
+          <MdDelete />
+        </button>
+    
       </label>
     </th>
     <td>
@@ -35,7 +39,11 @@ const ReviewCard = ({usrReview}) => {
     </td>
     <td>{date}</td>
     <th>
-      <button className="btn btn-ghost btn-xs">details</button>
+     <Link to={`/editReview/${_id}`}>
+     <button  className="btn btn-ghost btn-xs hover:bg-green-500"> <MdEditNote/></button>
+     </Link>
+
+     
     </th>
   </tr>
   );

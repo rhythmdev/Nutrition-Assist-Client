@@ -11,7 +11,8 @@ import ServiceDetails from "../../Pages/ServiceDetails/ServiceDetails";
 import AddServices from '../../Pages/Home/Services/AddServices'
 
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
-import ServiceReviewCard from "../../Pages/Home/Services/ServiceReviewCard"
+import EditReview from "../../Pages/Reviews/EditReview/EditReview";
+
 
 const router = createBrowserRouter([
  {
@@ -52,16 +53,17 @@ const router = createBrowserRouter([
          element: <Blog/>
       },
       {
-         path: '/myreviews',
+         path: '/myReviews',
          element: <PrivateRoute><MyReviews/></PrivateRoute>
       },
       {
-         path: '/addservice',
+         path: '/addService',
          element: <AddServices/>
       },
       {
-         path: '/card',
-         element: <ServiceReviewCard/>
+         path: '/editReview/:id',
+         element: <PrivateRoute><EditReview/></PrivateRoute>,
+         loader: ({params}) => fetch(`http://localhost:5000/reviews/${params.id}`)
       }
       
 
