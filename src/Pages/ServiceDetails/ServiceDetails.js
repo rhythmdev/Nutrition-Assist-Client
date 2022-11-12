@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { Link, useLoaderData } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthProvider/AuthProvide";
-import ServiceReviewCard from "../Home/Services/ServiceReviewCard"
+import ServiceReviewCard from "../Home/Services/ServiceReviewCard";
 
 const ServiceDetails = () => {
   const { user } = useContext(AuthContext);
@@ -88,6 +88,7 @@ const ServiceDetails = () => {
                   name="review"
                   placeholder="Your Review..."
                   className="p-4 rounded-md resize-none text-gray-800 bg-gray-50"
+                  required
                 ></textarea>
                 <button
                   type="submit"
@@ -119,21 +120,18 @@ const ServiceDetails = () => {
           style={{ borderTopWidth: "4px" }}
         />
         {reviews.length > 0 ? (
-         
           <>
-          <section className="my-8 bg-gray-100 text-gray-800">
-            <div className="container flex flex-col items-center justify-center mx-auto lg:flex-row lg:flex-wrap lg:justify-evenly lg:px-10">
-            {
-            reviews.map(review => <ServiceReviewCard key={review._id} newReview={review}></ServiceReviewCard>)
-          }
-            </div>
-          </section>
-         
+            <section className="my-8 bg-gray-100 text-gray-800">
+              <div className="container flex flex-col items-center justify-center mx-auto lg:flex-row lg:flex-wrap lg:justify-evenly lg:px-10">
+                {reviews.map((review) => (
+                  <ServiceReviewCard
+                    key={review._id}
+                    newReview={review}
+                  ></ServiceReviewCard>
+                ))}
+              </div>
+            </section>
           </>
-          
-         
-          
-         
         ) : (
           <p className="text-center text-2xl font-semibold mt-5">
             No Reviews Found
