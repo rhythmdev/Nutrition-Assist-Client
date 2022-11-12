@@ -1,6 +1,10 @@
 import React from "react";
+import useSetTitle from "../../hooks/useSetTitle";
 
 const Blog = () => {
+
+  useSetTitle('Blog');
+
   return (
     <div className="my-28">
       <section className="bg-gray-100 text-gray-800 rounded-md">

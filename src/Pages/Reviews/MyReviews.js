@@ -46,9 +46,8 @@ const MyReviews = () => {
       fetch(`http://localhost:5000/reviews/${id}`, {
         method: "PATCH",
       })
-
         .then((res) => res.json())
-        .then((data) => {    
+        .then((data) => {
           if (data.modifiedCount > 0) {
             toast.success("Review edited successfully");
             const remainingReviews = reviews.filter(
@@ -59,8 +58,6 @@ const MyReviews = () => {
         });
     }
   };
-
-
 
   return (
     <div>

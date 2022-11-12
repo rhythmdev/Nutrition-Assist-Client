@@ -2,10 +2,13 @@ import React, { useContext } from "react";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../contexts/AuthProvider/AuthProvide";
+import useSetTitle from "../../../hooks/useSetTitle";
 
 const AddServices = () => {
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
+ 
+  useSetTitle('Add Services');
 
   //** Add service handel */
   const handelAddService = (event) => {

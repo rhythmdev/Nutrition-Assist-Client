@@ -1,12 +1,16 @@
 import React, { useContext, useEffect, useState } from "react";
 import toast from "react-hot-toast";
-import { Link, useLoaderData } from "react-router-dom";
+import { Link, useLoaderData, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthProvider/AuthProvide";
+import useSetTitle from "../../hooks/useSetTitle";
 import ServiceReviewCard from "../Home/Services/ServiceReviewCard";
 
 const ServiceDetails = () => {
   const { user } = useContext(AuthContext);
   const [reviews, setReviews] = useState([]);
+  const navigate = useNavigate()
+
+  useSetTitle('Service Details');
 
   const { _id, title, image, price, description } = useLoaderData();
 
@@ -40,6 +44,7 @@ const ServiceDetails = () => {
       .then((data) => {
         if (data.acknowledged) {
           toast.success("Review added successfully");
+          navigate("/myReviews")
           event.target.reset();
         }
       })
@@ -96,6 +101,7 @@ const ServiceDetails = () => {
                 >
                   Leave feedback
                 </button>
+              
               </div>
             </div>
           </form>

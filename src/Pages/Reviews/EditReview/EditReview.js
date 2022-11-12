@@ -1,10 +1,13 @@
 import React from "react";
 import toast from "react-hot-toast";
 import { useLoaderData, useNavigate } from "react-router-dom";
+import useSetTitle from "../../../hooks/useSetTitle";
 
 const EditReview = () => {
   const fixedReview = useLoaderData();
   const navigate = useNavigate();
+
+  useSetTitle("Edit Review");
 
   const handelEditReview = (event) => {
     event.preventDefault();
