@@ -7,8 +7,8 @@ import useSetTitle from "../../../hooks/useSetTitle";
 const AddServices = () => {
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
- 
-  useSetTitle('Add Services');
+
+  useSetTitle("Add Services");
 
   //** Add service handel */
   const handelAddService = (event) => {
@@ -25,7 +25,7 @@ const AddServices = () => {
       price,
       description,
       image,
-      time: new Date().toLocaleTimeString(),
+      time: new Date().getTime(),
       email,
     };
 

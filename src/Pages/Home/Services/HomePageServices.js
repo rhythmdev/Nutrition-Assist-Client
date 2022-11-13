@@ -4,11 +4,13 @@ import ServiceCard from "./ServiceCard";
 
 const HomePageServices = () => {
   const [{ limitedServices }, setLimitedServices] = useState([]);
+
   useEffect(() => {
     fetch("http://localhost:5000/services")
       .then((res) => res.json())
       .then((data) => setLimitedServices(data));
   }, []);
+  
   return (
     <div className="my-16">
       <div className="text-center text-5xl font-mono font-bold text-gray-800">

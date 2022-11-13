@@ -44,7 +44,7 @@ const Login = () => {
       .then((result) => {
         const user = result.user;
         setUser(user);
-        console.log(user);
+        // console.log(user);
         setError("");
         toast.success(
           `Welcome ${user?.displayName ? user?.displayName : "No Name Found"}`

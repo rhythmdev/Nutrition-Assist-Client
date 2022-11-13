@@ -8,9 +8,9 @@ import ServiceReviewCard from "../Home/Services/ServiceReviewCard";
 const ServiceDetails = () => {
   const { user } = useContext(AuthContext);
   const [reviews, setReviews] = useState([]);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
-  useSetTitle('Service Details');
+  useSetTitle("Service Details");
 
   const { _id, title, image, price, description } = useLoaderData();
 
@@ -44,7 +44,7 @@ const ServiceDetails = () => {
       .then((data) => {
         if (data.acknowledged) {
           toast.success("Review added successfully");
-          navigate("/myReviews")
+          navigate("/myReviews");
           event.target.reset();
         }
       })
@@ -101,7 +101,6 @@ const ServiceDetails = () => {
                 >
                   Leave feedback
                 </button>
-              
               </div>
             </div>
           </form>
