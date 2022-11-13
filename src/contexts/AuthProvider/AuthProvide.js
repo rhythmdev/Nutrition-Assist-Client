@@ -49,7 +49,8 @@ const AuthProvide = ({ children }) => {
 
   //** sign out */
   const logOut = () => {
-    setLoading(true);
+     setLoading(true);
+     localStorage.removeItem('assistToken');
     return signOut(auth);
   };
 
@@ -73,6 +74,7 @@ const AuthProvide = ({ children }) => {
     logOut,
     signInWithGoogle,
     updateData,
+    setLoading
   };
 
   return (

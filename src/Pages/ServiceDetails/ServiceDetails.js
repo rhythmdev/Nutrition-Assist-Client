@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import toast from "react-hot-toast";
-import { Link, useLoaderData, useNavigate } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthProvider/AuthProvide";
 import useSetTitle from "../../hooks/useSetTitle";
 import ServiceReviewCard from "../Home/Services/ServiceReviewCard";
@@ -8,7 +8,7 @@ import ServiceReviewCard from "../Home/Services/ServiceReviewCard";
 const ServiceDetails = () => {
   const { user } = useContext(AuthContext);
   const [reviews, setReviews] = useState([]);
-  const navigate = useNavigate();
+  const [control, setControl] = useState(false);
 
   useSetTitle("Service Details");
 
@@ -43,8 +43,9 @@ const ServiceDetails = () => {
       .then((res) => res.json())
       .then((data) => {
         if (data.acknowledged) {
+          setControl(!control);
           toast.success("Review added successfully");
-          navigate("/myReviews");
+
           event.target.reset();
         }
       })
@@ -56,7 +57,7 @@ const ServiceDetails = () => {
     fetch(`http://localhost:5000/reviews?serviceId=${_id}`)
       .then((res) => res.json())
       .then((data) => setReviews(data));
-  }, [_id]);
+  }, [control, _id]);
 
   return (
     <div className="my-16">

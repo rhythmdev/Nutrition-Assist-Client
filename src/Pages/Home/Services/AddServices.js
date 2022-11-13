@@ -7,6 +7,7 @@ import useSetTitle from "../../../hooks/useSetTitle";
 const AddServices = () => {
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
+  
 
   useSetTitle("Add Services");
 

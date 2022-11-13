@@ -4,18 +4,31 @@ import { AuthContext } from "../../contexts/AuthProvider/AuthProvide";
 import MyReviewCard from "../Reviews/MyReviewCard";
 
 const MyReviews = () => {
-  const { user } = useContext(AuthContext);
+  const { user, logOut } = useContext(AuthContext);
 
   const [reviews, setReviews] = useState([]);
+  const [control, setControl] = useState(false);
 
   //** Get all reviews from mongodb */
   useEffect(
     () => {
-      fetch(`http://localhost:5000/myReviews?email=${user?.email}`)
-        .then((res) => res.json())
-        .then((data) => setReviews(data));
+      fetch(`http://localhost:5000/myReviews?email=${user?.email}`, {
+        headers: {
+          authorization: `Bearer ${localStorage.getItem("assistToken")}`,
+        },
+      })
+        .then((res) => {
+          if (res.status === 401 || res.status === 403) {
+            return logOut();
+          }
+          return res.json();
+        })
+        .then((data) => {
+          setControl(!control);
+          setReviews(data);
+        });
     },
-    [user?.email],
+    [user?.email, logOut, control],
     reviews
   );
 
@@ -29,7 +42,7 @@ const MyReviews = () => {
         .then((res) => res.json())
         .then((data) => {
           if (data.deletedCount > 0) {
-            toast.success("Review deleted successfully");
+            toast.error("Review deleted successfully");
             const remainingReviews = reviews.filter(
               (review) => review._id !== id
             );

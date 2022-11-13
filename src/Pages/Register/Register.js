@@ -1,4 +1,3 @@
-import { updateProfile } from "firebase/auth";
 import React, { useContext, useState } from "react";
 import toast from "react-hot-toast";
 import { Link, useLocation, useNavigate } from "react-router-dom";
@@ -11,7 +10,7 @@ const Register = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
-  const from = location.state?.from?.pathname || '/';
+  const from = location.state?.from?.pathname || "/";
 
   const handelSignUp = (event) => {
     event.preventDefault();
@@ -25,10 +24,27 @@ const Register = () => {
       .then((result) => {
         const user = result.user;
         setUser(user);
+        //** get jwt */
+        const currentUser = {
+          email: user.email,
+        };
+        fetch("http://localhost:5000/jwt", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(currentUser),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            localStorage.setItem("assistToken", data.token);
+            navigate(from, { replace: true });
+          });
+
         updateData(name, photoURL);
         setError("");
         toast.success("Registration Successfully");
-        navigate(from, { replace: true });
+
         form.reset();
       })
       .catch((error) => {

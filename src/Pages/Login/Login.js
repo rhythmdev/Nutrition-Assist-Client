@@ -10,7 +10,8 @@ const Login = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
-  const from = location.state?.from?.pathname || '/';
+  const from = location.state?.from?.pathname || "/";
+
   //** sign in with email and password */
   const handleLogin = (event) => {
     event.preventDefault();
@@ -21,18 +22,32 @@ const Login = () => {
     signIn(email, password)
       .then((result) => {
         const user = result.user;
-        setUser({
-          email: email,
-          uid: user.uid,
-        });
+        setUser(user);
+        const currentUser = {
+          email: user.email,
+        };
+
+        //** get jwt */
+        fetch("http://localhost:5000/jwt", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(currentUser),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            localStorage.setItem("assistToken", data.token);
+            navigate(from, { replace: true });
+          });
+
         setError("");
         toast.success(
           `Welcome ${user?.displayName ? user?.displayName : "No Name Found"}`
-         
         );
-        navigate(from, { replace: true });
+
         form.reset();
-        console.log(user);
+        // console.log(user);
       })
       .catch((error) => setError(toast.error(error.message)));
   };
@@ -44,12 +59,28 @@ const Login = () => {
       .then((result) => {
         const user = result.user;
         setUser(user);
+        //** get jwt */
+        const currentUser = {
+          email: user.email,
+        };
+        fetch("http://localhost:5000/jwt", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(currentUser),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            localStorage.setItem("assistToken", data.token);
+            navigate(from, { replace: true });
+          });
+
         // console.log(user);
         setError("");
         toast.success(
           `Welcome ${user?.displayName ? user?.displayName : "No Name Found"}`
         );
-        navigate(from, { replace: true });
       })
       .catch((error) => toast.error(error.message));
   };
