@@ -20,11 +20,11 @@ This is a nutrition assist web app. Here you can find your favorite service and 
 
 ## Technology
 
--**React**
--**React Router Dom**
--**React Hook**
--**Context API**
--**Firebase Authentication**
+*React*
+*React Router Dom*
+*React Hook*
+*Context API*
+*Firebase Authentication*
 -**Firebase Hosting**
 -**Dotenv**
 -**Tailwind CSS**
