@@ -7,6 +7,7 @@ import { AuthContext } from "../../contexts/AuthProvider/AuthProvide";
 const Login = () => {
   const { signIn, setUser, signInWithGoogle } = useContext(AuthContext);
   const [error, setError] = useState("");
+
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -22,6 +23,7 @@ const Login = () => {
     signIn(email, password)
       .then((result) => {
         const user = result.user;
+
         setUser(user);
         const currentUser = {
           email: user.email,
@@ -38,6 +40,7 @@ const Login = () => {
           .then((res) => res.json())
           .then((data) => {
             localStorage.setItem("assistToken", data.token);
+
             navigate(from, { replace: true });
           });
 

@@ -35,7 +35,7 @@ const Card = ({ newReview }) => {
           className="w-16 h-16 mb-2 -mt-16 bg-center bg-cover rounded-full bg-gray-300"
         />
         <p className="text-xl font-semibold leading-tight">{userName}</p>
-        <p className="text-sm uppercase">{date}</p>
+     
       </div>
     </div>
   );
