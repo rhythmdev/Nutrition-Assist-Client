@@ -12,11 +12,14 @@ const MyReviews = () => {
   //** Get all reviews from mongodb */
   useEffect(
     () => {
-      fetch(`http://localhost:5000/myReviews?email=${user?.email}`, {
-        headers: {
-          authorization: `Bearer ${localStorage.getItem("assistToken")}`,
-        },
-      })
+      fetch(
+        `https://nutrition-assist-server.vercel.app/myReviews?email=${user?.email}`,
+        {
+          headers: {
+            authorization: `Bearer ${localStorage.getItem("assistToken")}`,
+          },
+        }
+      )
         .then((res) => {
           if (res.status === 401 || res.status === 403) {
             return logOut();
@@ -34,9 +37,9 @@ const MyReviews = () => {
 
   //** delete review */
   const handelDeleteReview = (id) => {
-    const agree = window.confirm("Are you sure to delete this review?");
+    const agree = window.confirm("Do you actually want to delete this comment?");
     if (agree) {
-      fetch(`http://localhost:5000/reviews/${id}`, {
+      fetch(`https://nutrition-assist-server.vercel.app/reviews/${id}`, {
         method: "DELETE",
       })
         .then((res) => res.json())
@@ -56,7 +59,7 @@ const MyReviews = () => {
   const handelEditReview = (id) => {
     const agree = window.confirm("Are you sure to edit this review?");
     if (agree) {
-      fetch(`http://localhost:5000/reviews/${id}`, {
+      fetch(`https://nutrition-assist-server.vercel.app/reviews/${id}`, {
         method: "PATCH",
       })
         .then((res) => res.json())

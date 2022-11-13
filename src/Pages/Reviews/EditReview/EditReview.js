@@ -13,13 +13,16 @@ const EditReview = () => {
     event.preventDefault();
     const review = event.target.review.value;
     const newReview = { review };
-    fetch(`http://localhost:5000/editReview/${fixedReview._id}`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(newReview),
-    })
+    fetch(
+      `https://nutrition-assist-server.vercel.app/editReview/${fixedReview._id}`,
+      {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newReview),
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         if (data.acknowledged) {

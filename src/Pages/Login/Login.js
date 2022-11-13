@@ -28,7 +28,7 @@ const Login = () => {
         };
 
         //** get jwt */
-        fetch("http://localhost:5000/jwt", {
+        fetch("https://nutrition-assist-server.vercel.app/jwt", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -63,7 +63,7 @@ const Login = () => {
         const currentUser = {
           email: user.email,
         };
-        fetch("http://localhost:5000/jwt", {
+        fetch("https://nutrition-assist-server.vercel.app/jwt", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

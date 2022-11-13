@@ -29,11 +29,11 @@ const ServiceDetails = () => {
       email,
       photoURL,
       serviceId: _id,
-      date: new Date().toDateString(),
+      date: new Date().getTime(),
       serviceName: title,
     };
 
-    fetch("http://localhost:5000/addReview", {
+    fetch("https://nutrition-assist-server.vercel.app/addReview", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -54,7 +54,7 @@ const ServiceDetails = () => {
 
   //** Get all reviews from mongodb */
   useEffect(() => {
-    fetch(`http://localhost:5000/reviews?serviceId=${_id}`)
+    fetch(`https://nutrition-assist-server.vercel.app/reviews?serviceId=${_id}`)
       .then((res) => res.json())
       .then((data) => setReviews(data));
   }, [control, _id]);

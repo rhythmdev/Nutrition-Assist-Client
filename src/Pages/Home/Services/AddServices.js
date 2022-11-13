@@ -7,7 +7,6 @@ import useSetTitle from "../../../hooks/useSetTitle";
 const AddServices = () => {
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
-  
 
   useSetTitle("Add Services");
 
@@ -30,7 +29,7 @@ const AddServices = () => {
       email,
     };
 
-    fetch("http://localhost:5000/addService", {
+    fetch("https://nutrition-assist-server.vercel.app/addService", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(newService),
