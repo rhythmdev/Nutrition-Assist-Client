@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import useSetTitle from "../../hooks/useSetTitle";
 
 const ReviewCard = ({ usrReview, handelDeleteReview }) => {
-  const { _id, email, userName, photoURL, review, date } = usrReview;
+  const { _id, email, userName, photoURL, review, date, serviceName} = usrReview;
 
   useSetTitle("My Reviews");
 
@@ -35,7 +35,7 @@ const ReviewCard = ({ usrReview, handelDeleteReview }) => {
         </div>
       </td>
       <td className="font-semibold">{review}</td>
-      <td>{date}</td>
+      <td>{serviceName}</td>
       <th>
         <Link to={`/editReview/${_id}`}>
           <button className="btn btn-ghost btn-xs hover:bg-green-500">

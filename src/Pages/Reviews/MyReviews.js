@@ -94,7 +94,7 @@ const MyReviews = () => {
                   <th>Delete</th>
                   <th>User</th>
                   <th>Reviews</th>
-                  <th>Date</th>
+                  <th>Service Name</th>
                   <th>Edit</th>
                 </tr>
               </thead>
