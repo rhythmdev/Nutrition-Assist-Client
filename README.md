@@ -2,7 +2,7 @@
 
 ### Live Link - [https://nutrition-assist.web.app/]
 
-### Server Side Repo - [https://github.com/Porgramming-Hero-web-course/b6a11-service-review-server-side-rhythmdev]
+### Server Side Repo - [https://github.com/rhythmdev/Nutrition-Assist-Server]
 
 This is a nutrition assist web app. Here you can find your favorite service and get the nutrition information, Counseling & Coaching . You can also add your own service and review etc. You can also see your review list.
 
